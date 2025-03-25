@@ -1,8 +1,8 @@
 import numpy as np
-import matpotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
-def multiregression():
+def multiregression(y, Z):
     """
     preform multiple linear regression
     ----------
@@ -21,3 +21,15 @@ def multiregression():
     float
         the coefficient of determination (R^2)
     """
+    y = np.array(y)
+    Z = np.array(Z)
+
+    y_mean = np.average(y)
+    aCoeff = np.linalg.inv(np.transpose(Z)*Z) * (np.transpose(Z)*y)
+
+    ey = []
+    for i, yi in enumerate(y):
+        ey.append(yi - y_mean)
+
+
+
