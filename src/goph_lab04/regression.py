@@ -34,13 +34,13 @@ def multiregression(y, Z):
     
     ym = Z * aCoeff
 
-    ey = []
+    em = []
     for i, yi in enumerate(y):
-        ey.append(yi - ym[i]) 
-    Sr = np.sum(ey**2) 
+        em.append(yi - ym[i]) 
+    Sr = np.sum(em**2) 
 
     R = (Sy - Sr) / Sy 
 
-    return aCoeff, ey, R
+    return aCoeff, em, R
 
 
