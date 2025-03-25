@@ -23,23 +23,20 @@ def multiregression(y, Z):
     y = np.array(y)
     Z = np.array(Z)
 
-    y_mean = np.average(y)
-    aCoeff = np.linalg.inv(np.transpose(Z)*Z) * (np.transpose(Z)*y)
+    y_mean = np.mean(y)
 
-    ey = np.empty_like(y)
-    for i, yi in enumerate(y):
-        ey[i] = (yi - y_mean)
-    Sy = np.sum(ey**2)  
-    
-    ym = Z * aCoeff
+    ZtZ = np.dot(Z.T, Z)
+    ZtY = np.dot(Z.T, y)
+    aCoeff = np.linalg.solve(ZtZ, ZtY)
 
-    em = np.empty_like(ey)
-    for i, yi in enumerate(y):
-        em[i] = (yi - ym[i])
-    Sr = np.sum(em**2)
+    ey = y - y_mean
+    em = y - np.dot(Z, aCoeff)
+    Sy = np.dot(ey.T, ey)
+    Sr = np.dot(em.T, em)
+
 
     R = (Sy - Sr) / Sy 
 
-    return aCoeff, ey, R
+    return aCoeff, em, R
 
 
