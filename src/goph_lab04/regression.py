@@ -30,13 +30,13 @@ def multiregression(y, Z):
     aCoeff = np.linalg.solve(ZtZ, ZtY)
 
     ey = y - y_mean
-    em = y - np.dot(Z, aCoeff)
+    em = y.flatten() - np.dot(Z, aCoeff)
     Sy = np.dot(ey.T, ey)
     Sr = np.dot(em.T, em)
 
 
-    R = (Sy - Sr) / Sy 
+    R2 = (Sy - Sr) / Sy
 
-    return aCoeff, em, R
+    return aCoeff, em, R2
 
 
