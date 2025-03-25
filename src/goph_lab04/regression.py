@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def multiregression(y, Z):
@@ -27,17 +26,17 @@ def multiregression(y, Z):
     y_mean = np.average(y)
     aCoeff = np.linalg.inv(np.transpose(Z)*Z) * (np.transpose(Z)*y)
 
-    ey = []
+    ey = np.empty_like(y)
     for i, yi in enumerate(y):
-        ey.append(yi - y_mean) 
+        ey[i] = (yi - y_mean)
     Sy = np.sum(ey**2)  
     
     ym = Z * aCoeff
 
-    ey = []
+    em = np.empty_like(ey)
     for i, yi in enumerate(y):
-        ey.append(yi - ym[i]) 
-    Sr = np.sum(ey**2) 
+        em[i] = (yi - ym[i])
+    Sr = np.sum(em**2)
 
     R = (Sy - Sr) / Sy 
 
