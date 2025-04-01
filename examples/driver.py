@@ -109,14 +109,14 @@ def main():
     fig, axes = plt.subplots(1, 5, figsize=(20, 4))
 
     data_list = [
-        (m_data[:int_1], y_model1, aCoeff1, y1, m1, "0 < t < 35hrs"),
-        (m_data[:int_2], y_model2, aCoeff2, y2, m2, "35hrs < t < 45hrs"),
-        (m_data[:int_3], y_model3, aCoeff3, y3, m3, "45hrs < t < 73hrs"),
-        (m_data[:int_4], y_model4, aCoeff4, y4, m4, "73hrs < t < 96hrs"),
-        (m_data[:int_5], y_model5, aCoeff5, y5, m5, "96hrs < t < 120hrs"),
+        (y_model1, aCoeff1, y1, m1, "0 < t < 35hrs"),
+        (y_model2, aCoeff2, y2, m2, "35hrs < t < 45hrs"),
+        (y_model3, aCoeff3, y3, m3, "45hrs < t < 73hrs"),
+        (y_model4, aCoeff4, y4, m4, "73hrs < t < 96hrs"),
+        (y_model5, aCoeff5, y5, m5, "96hrs < t < 120hrs"),
     ]
 
-    for ax, (m_data, y_model, aCoeff, y_scatter, m_scatter, title) in zip(axes, data_list):
+    for ax, (y_model, aCoeff, y_scatter, m_scatter, title) in zip(axes, data_list):
         ax.plot(m_scatter, y_model, label=f"y = {aCoeff[0]:.2f} + {aCoeff[1]:.2f}m")
         ax.scatter(m_scatter, y_scatter)
         ax.set_xlabel("m_data")
