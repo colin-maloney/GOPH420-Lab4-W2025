@@ -26,9 +26,12 @@ def main():
     print(f"R^2: {R2}") 
     print(f" residuals: {em}")
 
+    y_model = []
     for i, mag in enumerate(m_data[:int_1]):
-        y_model =
+        y_model.append(aCoeff[0] + aCoeff[1] * mag)
 
+    plt.plot(m_data[:int_1], y_model)
+    plt.show()
 if __name__ == "__main__":
     main()
 
