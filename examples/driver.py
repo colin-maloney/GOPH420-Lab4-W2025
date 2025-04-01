@@ -11,7 +11,7 @@ def main():
 
     int_1 = np.argwhere(t < 35)[-1].item()
 
-    m1 = np.linspace(-0.25, 1, 20)
+    m1 = np.linspace(-0.15, 0.8, 20)
     n1 = np.zeros_like(m1)
 
     for i, m1m in enumerate(m1): 
@@ -35,7 +35,7 @@ def main():
 
     int_2 = np.argwhere(t < 45)[-1].item() 
 
-    m2 = np.linspace(-0.25, 1, 20)
+    m2 = np.linspace(-0.15, 0.8, 20)
     n2 = np.zeros_like(m2) 
 
     for i, m2m in enumerate(m2):
@@ -54,7 +54,7 @@ def main():
 
     int_3 = np.argwhere(t < 73)[-1].item()
 
-    m3 = np.linspace(-0.25, 1, 20)
+    m3 = np.linspace(-0.15, 0.8, 20)
     n3 = np.zeros_like(m3) 
 
     for i, m3m in enumerate(m3):
@@ -72,7 +72,7 @@ def main():
 
     int_4 = np.argwhere(t < 96)[-1].item()
 
-    m4 = np.linspace(-0.25, 1, 20)
+    m4 = np.linspace(-0.15, 0.8, 20)
     n4 = np.zeros_like(m4) 
 
     for i, m4m in enumerate(m4):
@@ -90,7 +90,7 @@ def main():
 
     int_5 = np.argwhere(t < 120)[-1].item()
 
-    m5 = np.linspace(-0.25, 1, 20)
+    m5 = np.linspace(-0.15, 0.8, 20)
     n = np.zeros_like(m5) 
 
     for i, m5m in enumerate(m5):
