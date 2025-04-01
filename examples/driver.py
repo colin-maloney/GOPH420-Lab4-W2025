@@ -11,13 +11,13 @@ def main():
 
     int_1 = np.argwhere(t < 35)[-1].item()
 
-    m1 = np.linspace(-0.2, 1.0, 20)
+    m1 = np.linspace(-0.25, 1, 20)
     n1 = np.zeros_like(m1)
 
     for i, m1m in enumerate(m1): 
         n1[i] = np.count_nonzero(m_data[:int_1] > m1m)
 
-    y1 = np.log(n1) 
+    y1 = np.log10(n1)
     z1 = np.vstack((np.ones_like(m1), m1)).T 
 
     aCoeff1, em1, R2_1 = multiregression(y1, z1) 
@@ -26,18 +26,20 @@ def main():
     print(f"R^2: {R2_1}") 
     print(f" residuals: {em1}")
 
-    y_model1 = []
-    for i, mag in enumerate(m_data[:int_1]):
-        y_model1.append(aCoeff1[0] + aCoeff1[1] * mag)
+    y_model1 = z1 @ aCoeff1
 
+    plt.figure()
+    plt.plot(m1, y_model1, "--k")
+    plt.plot(m1,y1, "ok")
+    plt.savefig("../figures/M_data1.png")
 
     int_2 = np.argwhere(t < 45)[-1].item() 
 
-    m2 = np.linspace(-0.9, 1.5, 20)
+    m2 = np.linspace(-0.25, 1, 20)
     n2 = np.zeros_like(m2) 
 
     for i, m2m in enumerate(m2):
-        n2[i] = np.count_nonzero(m_data[:int_2] > m2m) 
+        n2[i] = np.count_nonzero(m_data[int_1:int_2] > m2m)
 
     y2 = np.log(n2) 
     z2 = np.vstack((np.ones_like(m2), m2)).T
@@ -48,17 +50,15 @@ def main():
     print(f"R^2: {R2_2}") 
     print(f" residuals: {em2}")
 
-    y_model2 = []
-    for i, mag in enumerate(m_data[:int_2]):
-        y_model2.append(aCoeff2[0] + aCoeff2[1] * mag)
+    y_model2 = z2 @ aCoeff2
 
     int_3 = np.argwhere(t < 73)[-1].item()
 
-    m3 = np.linspace(-0.8, 1.1, 20) 
+    m3 = np.linspace(-0.25, 1, 20)
     n3 = np.zeros_like(m3) 
 
     for i, m3m in enumerate(m3):
-        n3[i] = np.count_nonzero(m_data[:int_3] > m3m) 
+        n3[i] = np.count_nonzero(m_data[int_2:int_3] > m3m)
 
     y3 = np.log(n3)
     z3 = np.vstack((np.ones_like(m3), m3)).T 
@@ -68,17 +68,15 @@ def main():
     print(f"R^2: {R2_3}") 
     print(f" residuals: {em3}")
 
-    y_model3 = []
-    for i, mag in enumerate(m_data[:int_3]):
-        y_model3.append(aCoeff3[0] + aCoeff3[1] * mag)
+    y_model3 = z3 @ aCoeff3
 
     int_4 = np.argwhere(t < 96)[-1].item()
 
-    m4 = np.linspace(-0.9, 1.0, 20) 
+    m4 = np.linspace(-0.25, 1, 20)
     n4 = np.zeros_like(m4) 
 
     for i, m4m in enumerate(m4):
-        n4[i] = np.count_nonzero(m_data[:int_4] > m4m)
+        n4[i] = np.count_nonzero(m_data[int_3:int_4] > m4m)
 
     y4 = np.log(n4) 
     z4 = np.vstack((np.ones_like(m4), m4)).T 
@@ -88,17 +86,15 @@ def main():
     print(f"R^2: {R2_4}") 
     print(f" residuals: {em4}")
 
-    y_model4 = []
-    for i, mag in enumerate(m_data[:int_4]):
-        y_model4.append(aCoeff4[0] + aCoeff4[1] * mag)
+    y_model4 = z4 @ aCoeff4
 
     int_5 = np.argwhere(t < 120)[-1].item()
 
-    m5 = np.linspace(-1.1, 1.1, 20) 
+    m5 = np.linspace(-0.25, 1, 20)
     n = np.zeros_like(m5) 
 
     for i, m5m in enumerate(m5):
-        n[i] = np.count_nonzero(m_data[:int_5] > m5m)
+        n[i] = np.count_nonzero(m_data[int_4:int_5] > m5m)
 
     y5 = np.log(n) 
     z5 = np.vstack((np.ones_like(m5), m5)).T 
@@ -108,22 +104,21 @@ def main():
     print(f"R^2: {R2_5}") 
     print(f" residuals: {em5}")
 
-    y_model5 = []
-    for i, mag in enumerate(m_data[:int_5]):
-        y_model5.append(aCoeff5[0] + aCoeff5[1] * mag)
+    y_model5 = z5 @ aCoeff5
 
     fig, axes = plt.subplots(1, 5, figsize=(20, 4))
 
     data_list = [
-        (m_data[:int_1], y_model1, aCoeff1, "0 < t < 35hrs"),
-        (m_data[:int_2], y_model2, aCoeff2, "35hrs < t < 45hrs"),
-        (m_data[:int_3], y_model3, aCoeff3, "45hrs < t < 73hrs"),
-        (m_data[:int_4], y_model4, aCoeff4, "73hrs < t < 96hrs"),
-        (m_data[:int_5], y_model5, aCoeff5, "96hrs < t < 120hrs"),
+        (m_data[:int_1], y_model1, aCoeff1, y1, m1, "0 < t < 35hrs"),
+        (m_data[:int_2], y_model2, aCoeff2, y2, m2, "35hrs < t < 45hrs"),
+        (m_data[:int_3], y_model3, aCoeff3, y3, m3, "45hrs < t < 73hrs"),
+        (m_data[:int_4], y_model4, aCoeff4, y4, m4, "73hrs < t < 96hrs"),
+        (m_data[:int_5], y_model5, aCoeff5, y5, m5, "96hrs < t < 120hrs"),
     ]
 
-    for ax, (x_data, y_model, aCoeff, title) in zip(axes, data_list):
-        ax.plot(x_data, y_model, label=f"y = {aCoeff[0]:.2f} + {aCoeff[1]:.2f}m")
+    for ax, (m_data, y_model, aCoeff, y_scatter, m_scatter, title) in zip(axes, data_list):
+        ax.plot(m_scatter, y_model, label=f"y = {aCoeff[0]:.2f} + {aCoeff[1]:.2f}m")
+        ax.scatter(m_scatter, y_scatter)
         ax.set_xlabel("m_data")
         ax.set_ylabel("y_model")
         ax.set_title(title)
