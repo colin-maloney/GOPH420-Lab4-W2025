@@ -28,12 +28,7 @@ def main():
 
     y_model1 = z1 @ aCoeff1
 
-    plt.figure()
-    plt.plot(m1, y_model1, "--k")
-    plt.plot(m1,y1, "ok")
-    plt.savefig("../figures/M_data1.png")
-
-    int_2 = np.argwhere(t < 45)[-1].item() 
+    int_2 = np.argwhere(t < 45)[-1].item()
 
     m2 = np.linspace(-0.15, 0.8, 20)
     n2 = np.zeros_like(m2) 
