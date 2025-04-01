@@ -115,7 +115,7 @@ def main():
         ax.plot(m_scatter, y_model, label=f"y = {aCoeff[0]:.2f} + {aCoeff[1]:.2f}m")
         ax.scatter(m_scatter, y_scatter)
         ax.set_xlabel("m_data")
-        ax.set_ylabel("y = log10(N)")
+        ax.set_ylabel("log10(N)")
         ax.set_title(title)
         ax.legend()
         ax.grid()
