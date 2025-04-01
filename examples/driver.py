@@ -1,4 +1,5 @@
-import numpy as np 
+import numpy as np
+import matplotlib.pyplot as plt
 
 from src.goph_lab04.regression import multiregression 
 
@@ -24,6 +25,9 @@ def main():
     print(f"aCoeff: {aCoeff}")
     print(f"R^2: {R2}") 
     print(f" residuals: {em}")
+
+    for i, mag in enumerate(m_data[:int_1]):
+        y_model =
 
 if __name__ == "__main__":
     main()
